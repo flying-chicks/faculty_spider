@@ -1,0 +1,69 @@
+* { padding:0; margin:0; outline:0; }
+body {
+	background:#f9ebae;
+	font-family: Verdana, sans-serif;
+	font-size:11px;
+	line-height:14px;
+	color:#5e5e5e;
+}
+input, textarea, select { font-family: Verdana, sans-serif; font-size:13px; }
+textarea { overflow:hidden; }
+
+.left{ float:left; display:inline; }
+
+h1{ font-size:22px; line-height:24px; color:#fff; font-weight: normal;}
+h2 { font-size:15px; font-weight: normal; }
+
+.shell { width:988px; margin:0 auto; }
+
+#header { height:89px; background:url(images/header.gif); white-space:nowrap; }
+#header h1{ float:left; display:inline; padding-top:12px; }
+
+#top { height:53px; }
+
+#container { padding:20px 0;}
+
+#content { float:left; width:953px; }
+/*table size*/
+
+.table thead th{ background:#fffdfa url(images/th.gif) repeat-x 0 0;
+	color:#818181;
+	padding:7px 10px;
+	border-bottom:solid 1px #d2d1cb;
+    text-align: center;
+}
+
+.table tbody td{
+           /*background:#fbfcfc;*/
+	       border-bottom:solid 1px #e0e0e0;
+           padding:8px 10px;
+           text-align: center;
+}
+
+/*.table tbody tr.odd{ background:#f8f8f8; }*/
+/*.table tbody tr.even{ background:#d2d1cb; }*/
+.table tbody tr:hover{ background:#fff9e1; }
+
+.box { background:#fbfcfc; height:100%; padding:1px; margin-bottom:20px; }
+.box-head { background:#ba4c32;
+            height:32px;
+            color:#fff;
+            padding: 0 10px;
+            line-height:32px;
+            white-space:nowrap;
+            border-bottom:solid 1px #fff; }
+
+.msg { position:relative; padding-right:35px; margin-bottom:10px; }
+.msg p{ padding:9px 10px 9px 40px; font-size:12px; background-repeat:no-repeat; background-position:10px 5px;}
+
+.msg-ok p{
+    background-color: #fffac2;
+    border:solid 1px #dbd6a2; color:#5e5c40;
+    background-image: url(images/monitor.png); }
+
+/*** CSS3 ***/
+.box { -moz-border-radius:5px; -webkit-border-radius:5px; -moz-box-shadow: 0 0 6px #978f6c; -webkit-box-shadow: 0 0 6px #978f6c;}
+.box-head { -moz-border-radius-topleft:5px; -moz-border-radius-topright:5px; -webkit-border-top-left-radius:5px; -webkit-border-top-right-radius:5px; }
+
+.msg p { -moz-border-radius:6px; -webkit-border-radius:6px; }
+

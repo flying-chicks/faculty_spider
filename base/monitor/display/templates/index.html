@@ -1,0 +1,152 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml">-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta content="text/html" http-equiv="content-type" charset="UTF-8"/>
+	<title>Faculty Spider Monitor</title>
+	<link rel="stylesheet" href="../static/style.css" type="text/css" media="all" />
+	<script type="text/javascript" src="../static/jquery.min.js"></script>
+    <script type="text/javascript">
+        function writeToRow(){
+            $.getJSON("/status_per_mac", function(data) {
+                if(data.length > 0){
+                    var tbody=$("#status_per_mac");
+                    tbody.empty();
+
+                    var keys = new Array("id", "slave", "uptime", "cpu_cores", "load_average", "total_memory",
+                                         "available_ratio", "alive", "complete", "accumulate");
+
+                    for(var r=0; r<data.length; r++){
+                        if(r%2==1){
+                            var tr=$("<tr class='odd'></tr>");
+                        }else{
+                            var tr=$("<tr class='even'></tr>");
+                        }
+                       tr.appendTo(tbody);
+
+                       for(var i = 0; i < keys.length; i++){
+                           var td=$("<td>"+ data[r][keys[i]]+"</td>");
+                           td.appendTo(tr);
+                       }
+
+                    }
+                }
+            });
+
+            $.getJSON('/total_status', function (data) {
+                    if(data.length > 0){
+                        var tbody=$("#total_status");
+                        tbody.empty();
+                        var tr = $("<tr></tr>");
+                        tr.appendTo(tbody)
+                        for(var c=0; c < data.length; c++){
+                            var td = $("<td>" + data[c] +"</td>");
+                            td.appendTo(tr);
+                        }
+
+                    }
+                }
+
+            );
+        }
+
+        function refresh() {
+            // window.setInterval("writeToRow()", "5000");
+			window.setInterval("writeToRow()", {{ update_interval }});
+        }
+
+        $("document").ready(writeToRow());
+    </script>
+</head>
+<body onload="refresh()">
+<!-- Header -->
+<div id="header">
+	<div class="shell">
+		<!-- Logo + Top Nav -->
+		<div id="top">
+			<h1>Faculty Spider Monitor</h1>
+		</div>
+	</div>
+</div>
+<!-- End Header -->
+
+<!-- Container -->
+<div id="container">
+	<div class="shell">
+
+		<!-- Message OK -->
+		<div class="msg msg-ok">
+			<p><strong>You are monitoring the spider!</strong></p>
+		</div>
+		<!-- End Message OK -->
+		<br />
+		<!-- Main -->
+		<div id="main">
+			<!-- Content -->
+			<div id="content">
+                <!-- Box -->
+                <div class="box">
+					<!-- Box Head -->
+					<div class="box-head">
+						<h2 class="left">Database Status</h2>
+					</div>
+					<!-- End Box Head -->
+
+					<!-- Table -->
+					<div class="table">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr>
+                                    <th>outstanding</th>
+                                    <th>complete</th>
+                                    <th>store</th>
+                                    <th>missing ratio(%)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="total_status"></tbody>
+
+						</table>
+					</div>
+					<!-- Table -->
+				</div>
+
+                <br />
+
+				<div class="box">
+					<!-- Box Head -->
+					<div class="box-head">
+						<h2 class="left">Current Machines</h2>
+					</div>
+					<!-- End Box Head -->	
+
+					<!-- Table -->
+					<div class="table">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>client address</th>
+                                    <th>uptime</th>
+                                    <th>cpu cores</th>
+                                    <th>load average</th>
+                                    <th>total memory(G)</th>
+                                    <th>memory available ratio(%)</th>
+                                    <th>alive</th>
+                                    <th>complete</th>
+                                    <th>accumulate</th>
+                                </tr>
+                            </thead>
+                            <tbody id="status_per_mac"></tbody>
+
+						</table>
+					</div>
+					<!-- Table -->
+					
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
